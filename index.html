@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anugraha Collections | Branded Surplus Deals</title>
+
+  <!-- Premium Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="royal-overlay" aria-hidden="true"></div>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <h1>Anugraha Collections</h1>
+        <p>Premium Brands • Surplus Stock • Unbeatable Prices</p>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#women">Women</a>
+        <a href="#men">Men</a>
+        <a href="#kids">Kids</a>
+        <a href="#girl">Girl</a>
+        <a href="#boy">Boy</a>
+      </nav>
+
+      <div class="trust-row">
+        <div class="pill">✔ 100% Original Brands</div>
+        <div class="pill">✔ Factory Surplus Deals</div>
+        <div class="pill">✔ Limited Stock</div>
+        <div class="pill">Support: anugrahacollections@email.com</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-card">
+        <div class="badge-row">
+          <span class="badge badge-hot">HOT DEALS</span>
+          <span class="badge badge-new">NEW ARRIVALS</span>
+          <span class="badge badge-stock">LIMITED STOCK</span>
+        </div>
+
+        <h2 class="hero-title">Premium Branded Fashion at Surplus Prices</h2>
+        <p class="hero-subtitle">
+          Shop authentic high-end brands at heavily discounted rates.
+          Factory-direct surplus • Export-quality • No retail markups.
+        </p>
+
+        <div class="hero-actions">
+          <a class="cta cta-primary" href="#women">Shop Women</a>
+          <a class="cta cta-outline" href="#men">Shop Men</a>
+          <a class="cta cta-outline" href="#kids">Shop Kids</a>
+        </div>
+
+        <div class="trust-strip">
+          <span>✔ 100% Authentic</span>
+          <span>✔ Branded Surplus</span>
+          <span>✔ Best Price Deals</span>
+          <span>✔ Fast-Moving Stock</span>
+        </div>
+
+        <p class="note">
+          Permanent products load from your GitHub repo folders:
+          <b>images/Women</b>, <b>images/Men</b>, <b>images/Kids</b>, <b>images/Girl</b>, <b>images/Boy</b>.
+          Update <b>products.json</b> to add/remove items.
+        </p>
+      </div>
+    </section>
+
+    <!-- WOMEN -->
+    <section id="women" class="section section-women">
+      <div class="section-head">
+        <h2>Women</h2>
+        <p>Branded dresses • Tops • Ethnic & western wear • Export surplus</p>
+      </div>
+
+      <!-- Permanent products render here -->
+      <div class="product-grid" data-products="Women"></div>
+    </section>
+
+    <!-- MEN -->
+    <section id="men" class="section section-men">
+      <div class="section-head">
+        <h2>Men</h2>
+        <p>Branded shirts • T-shirts • Jeans • Jackets • Factory surplus styles</p>
+      </div>
+
+      <!-- Permanent products render here -->
+      <div class="product-grid" data-products="Men"></div>
+    </section>
+
+    <!-- KIDS -->
+    <section id="kids" class="section section-kids">
+      <div class="section-head">
+        <h2>Kids</h2>
+        <p>Top kidswear brands • Comfortable fabrics • Discounted prices</p>
+      </div>
+
+      <!-- Permanent products render here -->
+      <div class="product-grid" data-products="Kids"></div>
+    </section>
+
+    <!-- GIRL -->
+    <section id="girl" class="section section-girl">
+      <div class="section-head">
+        <h2>Girl</h2>
+        <p>Branded girl outfits • Party wear • Daily wear • Surplus deals</p>
+      </div>
+
+      <!-- Permanent products render here -->
+      <div class="product-grid" data-products="Girl"></div>
+    </section>
+
+    <!-- BOY -->
+    <section id="boy" class="section section-boy">
+      <div class="section-head">
+        <h2>Boy</h2>
+        <p>Branded boy outfits • Casuals • Winter wear • Best deals</p>
+      </div>
+
+      <!-- Permanent products render here -->
+      <div class="product-grid" data-products="Boy"></div>
+    </section>
+
+    <!-- POLICIES / TRUST -->
+    <section class="policies">
+      <div class="policy-card">
+        <h3>Authenticity Promise</h3>
+        <p>
+          All products are <strong>100% authentic branded surplus</strong> sourced through authorized distributors
+          and manufacturer surplus channels.
+        </p>
+      </div>
+      <div class="policy-card">
+        <h3>Shipping</h3>
+        <p>Fast processing and reliable shipping. Delivery times vary by location.</p>
+      </div>
+      <div class="policy-card">
+        <h3>Returns & Support</h3>
+        <p>
+          Easy returns within the return window. Items must be unused and in original condition.
+          <br />Email: anugrahacollections@email.com
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div>© <span id="year"></span> Anugraha Collections • Premium Brands, Surplus Prices • Why Pay Retail?</div>
+  </footer>
+
+  <!-- Lightbox (Zoom) -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-content" role="dialog" aria-modal="true">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+      <img id="lightboxImg" alt="Product preview" />
+      <div class="lightbox-meta">
+        <div id="lightboxName" class="lightbox-name"></div>
+        <div id="lightboxPrice" class="lightbox-price"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
