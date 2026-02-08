@@ -1,12 +1,9 @@
 // ----------------------------
 // Anugraha Collections (GitHub Pages)
 // Permanent products loaded from products.json
-// Folders supported: images/Women, images/Men, images/Kids, images/Girl, images/Boy
+// Works with folders: images/Women, images/Men, images/Kids, images/Girl, images/Boy
 // ----------------------------
 
-/**
- * Keys MUST match your folder names + products.json keys exactly (case-sensitive on GitHub).
- */
 const CATEGORY_KEYS = ["Women", "Men", "Kids", "Girl", "Boy"];
 
 // Footer year
@@ -37,7 +34,6 @@ function openLightbox(item) {
 
 function closeLightbox() {
   if (!lightbox) return;
-
   lightbox.setAttribute("aria-hidden", "true");
   lightboxImg.src = "";
   lightboxImg.alt = "Product preview";
@@ -46,13 +42,12 @@ function closeLightbox() {
 
 if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
 if (lightboxBackdrop) lightboxBackdrop.addEventListener("click", closeLightbox);
-
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeLightbox();
 });
 
 // ----------------------------
-// Small helpers
+// Helpers
 // ----------------------------
 function escapeHtml(str) {
   return String(str ?? "")
@@ -64,8 +59,6 @@ function escapeHtml(str) {
 }
 
 function formatMoney(value) {
-  // If you already store "$29.99" in JSON, we keep it.
-  // If you store "29.99" or 29.99, we auto format with $.
   if (value === undefined || value === null) return "";
   const s = String(value).trim();
   if (!s) return "";
@@ -76,7 +69,7 @@ function formatMoney(value) {
 }
 
 // ----------------------------
-// Rendering products
+// Render products
 // ----------------------------
 function renderCategory(categoryKey, items) {
   const grid = document.querySelector(`[data-products="${categoryKey}"]`);
@@ -97,7 +90,6 @@ function renderCategory(categoryKey, items) {
       const name = escapeHtml(p.name || "Branded Surplus Item");
       const price = escapeHtml(formatMoney(p.price || ""));
       const img = escapeHtml(p.image || "");
-      const badge = escapeHtml(p.badge || "Surplus Deal");
 
       return `
         <article class="product-card" data-cat="${escapeHtml(categoryKey)}" data-idx="${idx}">
@@ -107,8 +99,7 @@ function renderCategory(categoryKey, items) {
           </div>
           <div class="product-info">
             <div class="product-name">${name}</div>
-            <div class="product-price">${price}</div>
-            <div class="product-badge">${badge}</div>
+            ${price ? `<div class="product-price">${price}</div>` : ``}
             <button class="product-btn" type="button">Add to Cart</button>
           </div>
         </article>
@@ -116,7 +107,7 @@ function renderCategory(categoryKey, items) {
     })
     .join("");
 
-  // Zoom click (card click except button)
+  // Card click opens zoom (except button)
   grid.querySelectorAll(".product-card").forEach((card) => {
     card.addEventListener("click", (e) => {
       if (e.target && e.target.classList.contains("product-btn")) return;
@@ -128,13 +119,13 @@ function renderCategory(categoryKey, items) {
 
       openLightbox({
         image: item.image,
-        name: item.name,
-        price: formatMoney(item.price),
+        name: item.name || "Branded Surplus Item",
+        price: formatMoney(item.price || ""),
       });
     });
   });
 
-  // Demo cart button (simple UI feedback)
+  // Simple button feedback
   grid.querySelectorAll(".product-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -150,13 +141,11 @@ function renderCategory(categoryKey, items) {
 }
 
 // ----------------------------
-// Load products.json (GitHub Pages)
+// Load products.json
 // ----------------------------
 async function loadProducts() {
   const res = await fetch("products.json", { cache: "no-store" });
-  if (!res.ok) {
-    throw new Error(`Could not load products.json (${res.status}). Ensure it is in your repo root.`);
-  }
+  if (!res.ok) throw new Error(`Could not load products.json (${res.status})`);
   return res.json();
 }
 
@@ -166,9 +155,7 @@ function renderLoadError(err) {
     grid.innerHTML = `
       <div class="empty-state">
         <b>Oops:</b> Could not load <b>products.json</b>.<br/>
-        1) Confirm <b>products.json</b> is in the repo root<br/>
-        2) Confirm GitHub Pages is enabled<br/>
-        3) Confirm paths match exactly (case-sensitive)
+        Make sure it exists in the repo root and GitHub Pages is deployed.
       </div>
     `;
   });
@@ -182,7 +169,6 @@ function renderLoadError(err) {
     const data = await loadProducts();
     window.__PRODUCTS__ = data;
 
-    // Render all categories we support
     CATEGORY_KEYS.forEach((key) => renderCategory(key, data[key]));
   } catch (err) {
     renderLoadError(err);
