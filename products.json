@@ -1,8 +1,9 @@
 {
-  "Women": [],
+  "Women": [
+    { "image": "images/Women/your-file-name.jpeg" }
+  ],
   "Men": [],
   "Kids": [],
   "Girl": [],
   "Boy": []
 }
-
